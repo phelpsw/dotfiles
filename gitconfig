@@ -1,10 +1,20 @@
+[user]
+    name = Phelps Williams
+    email = phelpsw@gmail.com
+
 [color]
 	diff = auto
 	status = auto
 	branch = auto
 
-[user]
-	email = pwilliams@spacex.com
-
 [core]
 	editor = vim
+
+[push]
+    default = current
+
+[core]
+    excludesfile = ~/.gitignore
+
+[help]
+    autocorrect = 1
