@@ -1,0 +1,10 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[user]
+	email = pwilliams@spacex.com
+
+[core]
+	editor = vim
