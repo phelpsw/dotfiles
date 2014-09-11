@@ -21,6 +21,7 @@ backup ~/.gitignore
 backup ~/.screenrc
 backup ~/.vim
 backup ~/.vimrc
+backup ~/.tmux.conf
 
 echo "Symlinking files:"
 link() {
@@ -37,5 +38,6 @@ link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vim ~/.vim
 link ~/dotfiles/vimrc ~/.vimrc
+link ~/dotfiles/tmux.conf ~/.tmux.conf
 
 echo "All done."
