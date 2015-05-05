@@ -10,4 +10,4 @@ alias zar='ssh -Y pwilliams@zarya'
 alias sx='cd /sx/$HOSTNAME/pwilliams/'
 alias lb='sx;cd load_builder'
 
-alias windoze='rm ~/.rdesktop/licence.*; rdesktop -upwilliams -dSPACEX -g1600x1100 pwilliams-z464'
+alias windoze='rm ~/.rdesktop/licence.*; rdesktop -upwilliams -dSPACEX -g1600x1000 pwilliams-z464'
