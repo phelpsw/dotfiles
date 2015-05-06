@@ -11,3 +11,4 @@ alias sx='cd /sx/$HOSTNAME/pwilliams/'
 alias lb='sx;cd load_builder'
 
 alias windoze='rm ~/.rdesktop/licence.*; rdesktop -upwilliams -dSPACEX -g1600x1000 pwilliams-z464'
+unset GPG_AGENT_INFO
