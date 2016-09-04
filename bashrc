@@ -3,14 +3,8 @@ alias ll='ls -l'
 alias la='ls -a'
 alias ltr='ls -ltr'
 
-alias sat='ssh -Y pwilliams@saturn'
-alias zar='ssh -Y pwilliams@zarya'
+alias sar='ssh pwilliams@quasar'
+alias per='ssh -Y pwilliams@supernova'
 
-# spacex stuff
-alias sx='cd /sx/$HOSTNAME/pwilliams/'
-alias lb='sx;cd load_builder'
+function pass2() { PASSWORD_STORE_DIR=$HOME/.password-store-sec/ bash -c "pass $*"; }
 
-alias windoze='rm ~/.rdesktop/licence.*; rdesktop -upwilliams -dSPACEX -g1600x1000 pwilliams-z464'
-
-# Used to deactivate the default gnupg-agent which doesn't support smartcards on Mint 17.1
-unset GPG_AGENT_INFO
