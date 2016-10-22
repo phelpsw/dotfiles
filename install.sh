@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 
+echo "Installing tools"
+# GPG / Password stuff
+sudo apt-get install pass gnupg gnupg-agent
+
+# General file editing
+sudo apt-get install vim vim-doc meld exuberant-ctags
+
+
 echo "Backup the original files"
 backup() {
     # backs up the file/folder the first time only
     file="$1"
     if [[ -f $file ]]; then
-        if [[ ! -f "$file.old" ]]; then
-            mv $file "$file.old"
-        fi
+        mv $file "$file.old_`date +%Y_%m_%d_%H_%M_%S`"
     elif [[ -d $file ]]; then
-        if [[ ! -d "$file.old" ]]; then
-            mv $file "$file.old"
-        fi
+        mv $file "$file.old_`date +%Y_%m_%d_%H_%M_%S`"
     fi
 }
 
-backup ~/.bashrc
+backup ~/.bash_aliases
 backup ~/.gitconfig
 backup ~/.gitignore
 backup ~/.screenrc
@@ -32,7 +36,7 @@ link() {
     ln -s "$from" "$to"
 }
 
-link ~/dotfiles/bashrc ~/.bashrc
+link ~/dotfiles/bash_aliases ~/.bash_aliases
 link ~/dotfiles/gitconfig ~/.gitconfig
 link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
