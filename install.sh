@@ -7,6 +7,9 @@ sudo apt-get install pass gnupg gnupg-agent
 # General file editing
 sudo apt-get install vim vim-doc meld exuberant-ctags
 
+# VPN
+sudo apt-get install openvpn
+
 
 echo "Backup the original files"
 backup() {
@@ -43,5 +46,12 @@ link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vim ~/.vim
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
+
+if [ ! -d ~/.ssh ]; then
+    mkdir ~/.ssh
+    ssh-keygen -b 4096 -o -a 100 -t rsa
+    ssh-add
+fi
+link ~/dotfiles/ssh_config ~/.ssh/config
 
 echo "All done."

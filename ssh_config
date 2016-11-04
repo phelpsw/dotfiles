@@ -1,0 +1,3 @@
+Host *.netflix.net, *.netflix.com, awstest, awsprod
+    User phelps
+
