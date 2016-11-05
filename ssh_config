@@ -1,3 +1,9 @@
-Host *.netflix.net, *.netflix.com, awstest, awsprod
+Host *.netflix.net
+    User phelps
+Host *.netflix.com
+    User phelps
+Host awstest
+    User phelps
+Host awsprod
     User phelps
 
