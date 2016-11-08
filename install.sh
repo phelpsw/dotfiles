@@ -10,12 +10,26 @@ sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv
 # VPN
 sudo apt-get install openvpn
 
+# Other
+# Weechat: https://github.com/rawdigits/wee-slack
+sudo apt-get install weechat weechat-plugins
+pip install websocket-client
+
+mkdir -p ~/.weechat/python/autoload/
+wget -O ~/.weechat/python/autoload/wee_slack.py \
+    https://raw.githubusercontent.com/rawdigits/wee-slack/master/wee_slack.py
+
 # Music
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-get update
 sudo apt-get install spotify-client
 
+
+# Netflix
+echo "deb http://artifacts.netflix.com/debian-local nflx main" >> /etc/apt/sources.list.d/netflix.list
+sudo apt-get update
+sudo apt-get install metatron
 
 echo "Backup the original files"
 backup() {
