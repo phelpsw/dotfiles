@@ -5,7 +5,7 @@ echo "Installing tools"
 sudo apt-get install pass gnupg gnupg-agent
 
 # General file editing
-sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv
+sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv screen
 
 # VPN
 sudo apt-get install openvpn
