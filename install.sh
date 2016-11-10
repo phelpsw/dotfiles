@@ -5,7 +5,7 @@ echo "Installing tools"
 sudo apt-get install pass gnupg gnupg-agent
 
 # General file editing
-sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv screen
+sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv screen ipython
 
 # VPN
 sudo apt-get install openvpn
@@ -70,6 +70,8 @@ link ~/dotfiles/tmux.conf ~/.tmux.conf
 # It seems the gnome keyring messes with the ssh-agent.  Uninstalling it helped
 # with a linux mint 18 cinnamon install (after restarting)
 # sudo apt-get autoremove gnome-keyring
+# This screwed up storing of network creds which was really annoying so
+# reversed this out...although it seems to have uninstalled something important.
 if [ ! -d ~/.ssh ]; then
     mkdir ~/.ssh
     ssh-keygen -b 4096 -o -a 100 -t rsa
