@@ -13,6 +13,7 @@ sudo apt-get install openvpn
 # Other
 # Weechat: https://github.com/rawdigits/wee-slack
 sudo apt-get install weechat weechat-plugins
+pip install setuptools wheel
 pip install websocket-client
 
 mkdir -p ~/.weechat/python/autoload/
