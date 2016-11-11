@@ -28,9 +28,12 @@ sudo apt-get install spotify-client
 
 
 # Netflix
-echo "deb http://artifacts.netflix.com/debian-local nflx main" >> /etc/apt/sources.list.d/netflix.list
+sudo sh -c 'echo "deb http://artifacts.netflix.com/debian-local nflx main" >> /etc/apt/sources.list.d/netflix.list'
 sudo apt-get update
-sudo apt-get install metatron
+sudo apt-get --allow-unauthenticated install metatron-cli
+sudo sed -i 's/deb http/#deb http/g' /etc/apt/sources.list.d/netflix.list
+sudo apt-get update
+metatron refresh
 
 echo "Backup the original files"
 backup() {
