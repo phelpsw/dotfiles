@@ -5,7 +5,14 @@ echo "Installing tools"
 sudo apt-get install pass gnupg gnupg-agent
 
 # General file editing
-sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv screen ipython
+sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv \
+    screen tmux ipython cmake build-essential python-dev python3-dev golang \
+    flake8 pylint pylint3
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# AWS
+pip install docopt paramiko
+sudo apt-get install awscli
 
 # VPN
 sudo apt-get install openvpn
@@ -50,7 +57,6 @@ backup ~/.bash_aliases
 backup ~/.gitconfig
 backup ~/.gitignore
 backup ~/.screenrc
-backup ~/.vim
 backup ~/.vimrc
 backup ~/.tmux.conf
 
@@ -67,7 +73,6 @@ link ~/dotfiles/bash_aliases ~/.bash_aliases
 link ~/dotfiles/gitconfig ~/.gitconfig
 link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
-link ~/dotfiles/vim ~/.vim
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
 
@@ -84,3 +89,7 @@ fi
 link ~/dotfiles/ssh_config ~/.ssh/config
 
 echo "All done."
+echo "Open vim and type :PluginInstall for Vundle to install vim plugins."
+echo "After this, complete Python Code Completion installation:"
+echo "cd ~/.vim/bundle/YouCompleteMe"
+echo "./install.py"
