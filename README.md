@@ -30,14 +30,15 @@ cd dotfiles
 /filter add irc_smart * irc_smart_filter *
 ```
 
-### ssh-agent issues with gnome-keyring
+### Mint Cinnamon 18 gnome-keyring fails to work as an ssh-agent
+Disable keyring from being used as ssh-agent.  Defaults back to ssh-agent.
+Requires ```ssh-add``` to be run at login to register keys with the agent.
+
 https://www.earth.li/~noodles/blog/2016/07/ssh-agent-confirmation.html
+
 ```
-$ echo use-agent >> ~/.gnupg/options
-$ echo enable-ssh-support >> ~/.gnupg/gpg-agent.conf
 (cat /etc/xdg/autostart/gnome-keyring-ssh.desktop ;
  echo 'X-GNOME-Autostart-enabled=false') > \
  ~/.config/autostart/gnome-keyring-ssh.desktop
-ssh-add -c <ssh keyfile>
 ```
 
