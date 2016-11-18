@@ -14,6 +14,9 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 pip install docopt paramiko
 sudo apt-get install awscli
 
+# SQL
+sudo apt-get install mysql-workbench
+
 # VPN
 sudo apt-get install openvpn
 
