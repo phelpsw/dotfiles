@@ -8,7 +8,15 @@ sudo apt-get install pass gnupg gnupg-agent
 sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv \
     screen tmux ipython cmake build-essential python-dev python3-dev golang \
     flake8 pylint pylint3
+
+# Download Vundle vim package manager and install configured plugins (vimrc)
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+# Install autocompletion vim plugin
+pushd ~/.vim/bundle/YouCompleteMe
+python ./install.py
+popd
 
 # AWS
 pip install docopt paramiko
@@ -92,7 +100,3 @@ fi
 link ~/dotfiles/ssh_config ~/.ssh/config
 
 echo "All done."
-echo "Open vim and type :PluginInstall for Vundle to install vim plugins."
-echo "After this, complete Python Code Completion installation:"
-echo "cd ~/.vim/bundle/YouCompleteMe"
-echo "./install.py"

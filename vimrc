@@ -30,6 +30,12 @@ Plugin 'nvie/vim-flake8'
 " Nice looking theme
 Plugin 'jnurmine/Zenburn'
 
+" git vim plugin
+Plugin 'tpope/vim-fugitive'
+
+" json highlighting
+Plugin 'elzr/vim-json'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -104,12 +110,13 @@ set foldlevel=99
 nnoremap <space> za
 
 "python with virtualenv support
-"py << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"    project_base_dir = os.environ['VIRTUAL_ENV']
-"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"    execfile(activate_this, dict(__file__=activate_this))
-"EOF
+python3 << EOF
+import os
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    with open(activate_this) as f:
+        code = compile(f.read(), activate_this, 'exec')
+        exec(code, dict(__file__=activate_this))
+EOF
 
