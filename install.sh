@@ -31,6 +31,7 @@ sudo apt-get install openvpn
 # Other
 # Weechat: https://github.com/rawdigits/wee-slack
 sudo apt-get install weechat weechat-plugins
+sudo apt-get install redshift-gtk
 pip install setuptools wheel
 pip install websocket-client
 
@@ -70,6 +71,8 @@ backup ~/.gitignore
 backup ~/.screenrc
 backup ~/.vimrc
 backup ~/.tmux.conf
+mkdir -p ~/.config/
+backup ~/.config/redshift.conf
 
 echo "Symlinking files:"
 link() {
@@ -86,6 +89,7 @@ link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
+link ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
 # It seems the gnome keyring messes with the ssh-agent.  Uninstalling it helped
 # with a linux mint 18 cinnamon install (after restarting)
