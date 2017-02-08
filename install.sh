@@ -28,6 +28,11 @@ sudo apt-get install mysql-workbench
 # VPN
 sudo apt-get install openvpn
 
+# zsh
+sudo apt-get install zsh zsh-common
+chsh -s /bin/zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
 # Other
 # Weechat: https://github.com/rawdigits/wee-slack
 sudo apt-get install weechat weechat-plugins
@@ -71,6 +76,7 @@ backup ~/.gitignore
 backup ~/.screenrc
 backup ~/.vimrc
 backup ~/.tmux.conf
+backup ~/.zshrc
 mkdir -p ~/.config/
 backup ~/.config/redshift.conf
 
@@ -89,6 +95,7 @@ link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
+link ~/dotfiles/zshrc ~/.zshrc
 link ~/dotfiles/redshift.conf ~/.config/redshift.conf
 
 # It seems the gnome keyring messes with the ssh-agent.  Uninstalling it helped

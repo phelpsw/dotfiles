@@ -33,8 +33,8 @@ Plugin 'jnurmine/Zenburn'
 " git vim plugin
 Plugin 'tpope/vim-fugitive'
 
-" json highlighting
-Plugin 'elzr/vim-json'
+" Powerline equivalent
+Plugin 'vim-airline/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
