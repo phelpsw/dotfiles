@@ -41,3 +41,68 @@ wget -O ~/.weechat/python/autoload/wee_slack.py \
 
 # Redshift screen temp adjustment
 sudo pacman -S redshift
+
+# TODO: Install yaourt here
+
+# Metatron
+sudo pacman -S jq curl jre8-openjdk
+sudo curl -o /usr/local/bin/metatron https://artifacts.netflix.com/libs-releases-local/netflix/metatron-cli/1.65.0/metatron-cli-launcher-1.65.0.sh
+sudo chmod +x /usr/local/bin/metatron
+
+echo "Backup the original files"
+backup() {
+    # backs up the file/folder the first time only
+    file="$1"
+    if [[ -f $file ]]; then
+        mv $file "$file.old_`date +%Y_%m_%d_%H_%M_%S`"
+    elif [[ -d $file ]]; then
+        mv $file "$file.old_`date +%Y_%m_%d_%H_%M_%S`"
+    fi
+}
+
+backup ~/.aliases
+backup ~/.gitconfig
+backup ~/.gitignore
+backup ~/.screenrc
+backup ~/.vimrc
+backup ~/.tmux.conf
+backup ~/.zshrc
+backup ~/.ssh/config
+mkdir -p ~/.config/
+backup ~/.config/redshift.conf
+backup ~/.config/i3/config
+
+echo "Symlinking files:"
+link() {
+    from="$1"
+    to="$2"
+    echo "Linking '$from' to '$to'"
+    rm -f "$to"
+    ln -s "$from" "$to"
+}
+
+link ~/dotfiles/aliases ~/.aliases
+link ~/dotfiles/gitconfig ~/.gitconfig
+link ~/dotfiles/gitignore ~/.gitignore
+link ~/dotfiles/screenrc ~/.screenrc
+link ~/dotfiles/vimrc ~/.vimrc
+link ~/dotfiles/tmux.conf ~/.tmux.conf
+link ~/dotfiles/zshrc ~/.zshrc
+link ~/dotfiles/redshift.conf ~/.config/redshift.conf
+link ~/dotfiles/i3_config ~/.config/i3/config
+
+# Install Vundle packages and autocompletion vim plugin
+yaourt -S vim-colors-zenburn-git
+vim +PluginInstall +qall
+pushd ~/.vim/bundle/YouCompleteMe
+python ./install.py
+popd
+
+if [ ! -d ~/.ssh ]; then
+    mkdir ~/.ssh
+    ssh-keygen -b 4096 -o -a 100 -t rsa
+    ssh-add
+fi
+link ~/dotfiles/ssh_config ~/.ssh/config
+
+echo "All done."
