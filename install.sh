@@ -9,14 +9,9 @@ sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv \
     screen tmux ipython cmake build-essential python-dev python3-dev golang \
     flake8 pylint pylint3
 
-# Download Vundle vim package manager and install configured plugins (vimrc)
+# Download Vundle vim package manager
+mkdir -p ~/.vim/bundle/
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-
-# Install autocompletion vim plugin
-pushd ~/.vim/bundle/YouCompleteMe
-python ./install.py
-popd
 
 # AWS
 pip install docopt paramiko
@@ -97,6 +92,12 @@ link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
 link ~/dotfiles/redshift.conf ~/.config/redshift.conf
+
+# Install Vundle packages and autocompletion vim plugin
+vim +PluginInstall +qall
+pushd ~/.vim/bundle/YouCompleteMe
+python ./install.py
+popd
 
 # It seems the gnome keyring messes with the ssh-agent.  Uninstalling it helped
 # with a linux mint 18 cinnamon install (after restarting)

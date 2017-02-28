@@ -1,0 +1,12 @@
+# ls aliases
+alias ll='ls -l'
+alias la='ls -a'
+alias ltr='ls -ltr'
+
+alias sar='ssh pwilliams@quasar'
+alias per='ssh pwilliams@supernova'
+alias vpnen='sudo systemctl start openvpn-client@netflix.service'
+alias vpndis='sudo systemctl stop openvpn-client@netflix.service'
+alias bigb='python2 /home/$USER/projects/bigbertha/bigbertha.py assume'
+
+
