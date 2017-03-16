@@ -37,6 +37,7 @@ bindsym $mod+Shift+q kill
 
 bindsym Mod1+l exec "~/.local/bin/fuzzy_lock.sh"
 exec xautolock -time 15 -detectsleep -locker '~/.local/bin/fuzzy_lock.sh' &
+exec --no-startup-id redshift-gtk
 
 bindsym XF86AudioMute exec "amixer -q sset Master toggle"
 bindsym XF86AudioRaiseVolume exec "amixer -q sset Master 3%+"
