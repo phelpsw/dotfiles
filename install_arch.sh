@@ -44,6 +44,8 @@ sudo pacman -S redshift
 
 # TODO: Install yaourt here
 
+yaourt -S postman-bin
+
 # Metatron
 sudo pacman -S jq curl jre8-openjdk
 sudo curl -o /usr/local/bin/metatron https://artifacts.netflix.com/libs-releases-local/netflix/metatron-cli/1.65.0/metatron-cli-launcher-1.65.0.sh
@@ -71,6 +73,9 @@ backup ~/.ssh/config
 mkdir -p ~/.config/
 backup ~/.config/redshift.conf
 backup ~/.config/i3/config
+mkdir -p ~/.gnupg/
+backup ~/.gnupg/gpg-agent.conf
+backup ~/.pam_environment
 
 echo "Symlinking files:"
 link() {
@@ -90,6 +95,8 @@ link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
 link ~/dotfiles/redshift.conf ~/.config/redshift.conf
 link ~/dotfiles/i3_config ~/.config/i3/config
+link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+link ~/dotfiles/pam_environment ~/.pam_environment
 
 # Install Vundle packages and autocompletion vim plugin
 yaourt -S vim-colors-zenburn-git
