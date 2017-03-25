@@ -5,12 +5,12 @@ sudo pacman -Syu
 
 echo "Installing tools"
 # GPG / Password stuff
-sudo pacman -S pass gnupg
+sudo pacman --noconfirm -S pass gnupg
 
 # General file editing
-sudo pacman -S vim meld python python2 python-pip python2-virtualenv \
-    screen tmux ipython cmake go flake8 python2-flake8 python-pylint \
-    python2-pylint
+sudo pacman --noconfirm -S vim meld python python2 python-pip \
+    python2-virtualenv screen tmux ipython cmake go flake8 python2-flake8 \
+    python-pylint python2-pylint
 
 # Download Vundle vim package manager and install configured plugins (vimrc)
 mkdir -p ~/.vim/bundle/
@@ -18,21 +18,21 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # AWS
 sudo pip install docopt paramiko
-sudo pacman -S aws-cli
+sudo pacman --noconfirm -S aws-cli
 
 # VPN
-sudo pacman -S openvpn
+sudo pacman --noconfirm -S openvpn
 
 # zsh
-sudo pacman -S zsh
+sudo pacman --noconfirm -S zsh
 chsh -s /bin/zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # Image / PDF viewing
-sudo pacman -S feh zathura-pdf-mupdf
+sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip
 
 # Weechat: https://github.com/rawdigits/wee-slack
-sudo pacman -S weechat
+sudo pacman --noconfirm -S weechat
 sudo pip install setuptools wheel
 sudo pip install websocket-client
 mkdir -p ~/.weechat/python/autoload/
@@ -40,12 +40,14 @@ wget -O ~/.weechat/python/autoload/wee_slack.py \
     https://raw.githubusercontent.com/rawdigits/wee-slack/master/wee_slack.py
 
 # Redshift screen temp adjustment
-sudo pacman -S redshift
+sudo pacman --noconfirm -S redshift
 
 # TODO: Install yaourt here
 
+yaourt --noconfirm -S postman-bin
+
 # Metatron
-sudo pacman -S jq curl jre8-openjdk
+sudo pacman --noconfirm -S jq curl jre8-openjdk
 sudo curl -o /usr/local/bin/metatron https://artifacts.netflix.com/libs-releases-local/netflix/metatron-cli/1.65.0/metatron-cli-launcher-1.65.0.sh
 sudo chmod +x /usr/local/bin/metatron
 
@@ -71,6 +73,11 @@ backup ~/.ssh/config
 mkdir -p ~/.config/
 backup ~/.config/redshift.conf
 backup ~/.config/i3/config
+mkdir -p ~/.gnupg/
+backup ~/.gnupg/gpg-agent.conf
+backup ~/.pam_environment
+mkdir -p ~/.local/bin
+backup ~/.local/bin/fuzzy_lock.sh
 
 echo "Symlinking files:"
 link() {
@@ -90,9 +97,12 @@ link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
 link ~/dotfiles/redshift.conf ~/.config/redshift.conf
 link ~/dotfiles/i3_config ~/.config/i3/config
+link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+link ~/dotfiles/pam_environment ~/.pam_environment
+link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
 
 # Install Vundle packages and autocompletion vim plugin
-yaourt -S vim-colors-zenburn-git
+yaourt --noconfirm -S vim-colors-zenburn-git
 vim +PluginInstall +qall
 pushd ~/.vim/bundle/YouCompleteMe
 python ./install.py
