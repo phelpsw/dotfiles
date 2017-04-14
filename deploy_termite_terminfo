@@ -1,0 +1,10 @@
+#!/bin/bash
+
+HOST=$1
+
+infocmp > /tmp/termite.terminfo
+
+scp /tmp/termite.terminfo $HOST:~/termite.terminfo
+ssh $HOST 'tic -x ~/termite.terminfo && rm ~/termite.terminfo'
+
+rm /tmp/termite.terminfo
