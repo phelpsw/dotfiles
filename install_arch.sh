@@ -78,6 +78,8 @@ backup ~/.gnupg/gpg-agent.conf
 backup ~/.pam_environment
 mkdir -p ~/.local/bin
 backup ~/.local/bin/fuzzy_lock.sh
+mkdir -p ~/.config/i3status/
+backup ~/.config/i3status/config
 
 echo "Symlinking files:"
 link() {
@@ -100,6 +102,7 @@ link ~/dotfiles/i3_config ~/.config/i3/config
 link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 link ~/dotfiles/pam_environment ~/.pam_environment
 link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
+link ~/dotfiles/i3status.conf ~/.config/i3status/config
 
 # Install Vundle packages and autocompletion vim plugin
 yaourt --noconfirm -S vim-colors-zenburn-git
