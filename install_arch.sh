@@ -46,10 +46,13 @@ sudo pacman --noconfirm -S redshift
 
 yaourt --noconfirm -S postman-bin
 
+# TODO: Figure out whether go is even available before executing
 # Metatron
 sudo pacman --noconfirm -S jq curl jre8-openjdk
-sudo curl -o /usr/local/bin/metatron https://artifacts.netflix.com/libs-releases-local/netflix/metatron-cli/1.65.0/metatron-cli-launcher-1.65.0.sh
-sudo chmod +x /usr/local/bin/metatron
+curl -sL https://go.netflix.com/metatron-install | bash
+
+# Newt
+curl -q -sL 'https://go.netflix.com/newt-install' | bash
 
 echo "Backup the original files"
 backup() {
