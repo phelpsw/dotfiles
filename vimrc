@@ -11,9 +11,23 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+"
+" General Plugins
+"
+
 " SimpylFold for improved python folding
 " https://github.com/tmhedberg/SimpylFold
 Plugin 'tmhedberg/SimpylFold'
+
+" Nice looking theme
+Plugin 'jnurmine/Zenburn'
+
+" Syntax highlighting
+Plugin 'scrooloose/syntastic'
+
+"
+" Python Plugins
+"
 
 " More intelligent python indentation
 Plugin 'vim-scripts/indentpython.vim'
@@ -21,20 +35,13 @@ Plugin 'vim-scripts/indentpython.vim'
 " Python autocompletion
 Bundle 'Valloric/YouCompleteMe'
 
-" Syntax highlighting
-Plugin 'scrooloose/syntastic'
-
 " PEP8 checking
 Plugin 'nvie/vim-flake8'
 
-" Nice looking theme
-Plugin 'jnurmine/Zenburn'
-
-" git vim plugin
-Plugin 'tpope/vim-fugitive'
-
-" Powerline equivalent
-Plugin 'vim-airline/vim-airline'
+"
+" Go
+"
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

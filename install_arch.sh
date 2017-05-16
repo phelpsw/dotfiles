@@ -121,4 +121,6 @@ if [ ! -d ~/.ssh ]; then
 fi
 link ~/dotfiles/ssh_config ~/.ssh/config
 
+echo "Please run :GoInstallBinaries in vim to complete install"
+
 echo "All done."
