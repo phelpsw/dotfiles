@@ -76,6 +76,16 @@ au BufNewFile,BufRead *.go
     \ set fileformat=unix |
     \ set encoding=utf-8
 
+" yaml Spacing
+au BufNewFile,BufRead *.yaml
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+    \ set encoding=utf-8
+
 " YouCompleteMe Modifications:
 let g:ycm_autoclose_preview_window_after_completion=1
 "map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
