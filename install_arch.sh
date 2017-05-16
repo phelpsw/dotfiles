@@ -101,11 +101,16 @@ link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
 link ~/dotfiles/redshift.conf ~/.config/redshift.conf
+link ~/dotfiles/redshift_systemd.conf ~/.config/systemd/user/redshift.service.d/display.conf
 link ~/dotfiles/i3_config ~/.config/i3/config
 link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 link ~/dotfiles/pam_environment ~/.pam_environment
 link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
 link ~/dotfiles/i3status.conf ~/.config/i3status/config
+
+# Startup redshift now that config files are in place
+systemctl --user enable redshift
+systemctl --user start redshift
 
 # Install Vundle packages and autocompletion vim plugin
 yaourt --noconfirm -S vim-colors-zenburn-git
