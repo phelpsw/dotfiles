@@ -110,6 +110,7 @@ link ~/dotfiles/i3status.conf ~/.config/i3status/config
 # Install Vundle packages and autocompletion vim plugin
 yaourt --noconfirm -S vim-colors-zenburn-git
 vim +PluginInstall +qall
+vim +GoInstallBinaries +qall
 pushd ~/.vim/bundle/YouCompleteMe
 python ./install.py
 popd
@@ -120,7 +121,5 @@ if [ ! -d ~/.ssh ]; then
     ssh-add
 fi
 link ~/dotfiles/ssh_config ~/.ssh/config
-
-echo "Please run :GoInstallBinaries in vim to complete install"
 
 echo "All done."
