@@ -50,6 +50,9 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# start chrome hotkey
+bindsym $mod+apostrophe exec --no-startup-id google-chrome-stable
+
 # change focus
 #bindsym $mod+j focus left
 #bindsym $mod+k focus down
