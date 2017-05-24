@@ -39,9 +39,15 @@ bindsym Mod1+l exec "~/.local/bin/fuzzy_lock.sh"
 exec xautolock -time 15 -detectsleep -locker '~/.local/bin/fuzzy_lock.sh' &
 exec --no-startup-id redshift-gtk
 
+# TODO: Detect lenovo laptop and no attached keyboard
 bindsym XF86AudioMute exec "amixer -q sset Master toggle"
 bindsym XF86AudioRaiseVolume exec "amixer -q sset Master 3%+"
 bindsym XF86AudioLowerVolume exec "amixer -q sset Master 3%-"
+
+# TODO: Detect attached keyboard
+bindsym $mod+F8 exec "amixer -q sset Master toggle"
+bindsym $mod+F10 exec "amixer -q sset Master 3%+"
+bindsym $mod+F9 exec "amixer -q sset Master 3%-"
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
