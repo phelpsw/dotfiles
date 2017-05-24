@@ -9,8 +9,8 @@ sudo pacman --noconfirm -S pass gnupg
 
 # General file editing
 sudo pacman --noconfirm -S vim meld python python2 python-pip \
-    python2-virtualenv screen tmux ipython cmake go flake8 python2-flake8 \
-    python-pylint python2-pylint glide
+    python2-virtualenv screen tmux ipython cmake flake8 python2-flake8 \
+    python-pylint python2-pylint
 
 # Download Vundle vim package manager and install configured plugins (vimrc)
 mkdir -p ~/.vim/bundle/
@@ -41,6 +41,10 @@ wget -O ~/.weechat/python/autoload/wee_slack.py \
 
 # Redshift screen temp adjustment
 sudo pacman --noconfirm -S redshift
+
+# golang tools
+sudo pacman --noconfirm -S go glide
+mkdir -p ~/projects/go
 
 # TODO: Install yaourt here
 
