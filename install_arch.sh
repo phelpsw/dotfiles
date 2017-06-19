@@ -113,7 +113,9 @@ link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
 link ~/dotfiles/i3status.conf ~/.config/i3status/config
 
 # Startup redshift now that config files are in place
-systemctl --user enable redshift
+# https://superuser.com/questions/759759/writing-a-service-that-depends-on-xorg
+# Not enabling by default because it isn't setup to start after Xorg is running
+# systemctl --user enable redshift
 systemctl --user start redshift
 
 # Install Vundle packages and autocompletion vim plugin
