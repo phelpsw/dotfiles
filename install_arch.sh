@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# Determine environment specifics
+NETFLIX=false
+echo "Install Netflix tools (requires Netflix network)?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) NETFLIX=true; break;;
+        No ) break;;
+    esac
+done
+
 # Update pacman
 sudo pacman -Syu
 
@@ -8,20 +18,30 @@ echo "Installing tools"
 sudo pacman --noconfirm -S pass gnupg
 
 # General file editing
-sudo pacman --noconfirm -S vim meld python python2 python-pip \
-    python2-virtualenv screen tmux ipython cmake flake8 python2-flake8 \
-    python-pylint python2-pylint strace
+sudo pacman --noconfirm -S vim meld screen tmux
+
+# Random Development Tools
+sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
+    mitmproxy wavemon graphviz
+
+# Python Specific Tools
+sudo pacman --noconfirm -S python python2 python-pip python2-pip \
+    python2-virtualenv ipython flake8 python2-flake8 python-pylint \
+    python2-pylint
 
 # Download Vundle vim package manager and install configured plugins (vimrc)
 mkdir -p ~/.vim/bundle/
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # AWS
-sudo pip install docopt paramiko
+sudo pacman --noconfirm -S python-paramiko python-docopt
 sudo pacman --noconfirm -S aws-cli
 
 # VPN
 sudo pacman --noconfirm -S openvpn
+
+# Postgres
+sudo pacman --noconfirm -S postgresql
 
 # zsh
 sudo pacman --noconfirm -S zsh
@@ -33,8 +53,8 @@ sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip
 
 # Weechat: https://github.com/rawdigits/wee-slack
 sudo pacman --noconfirm -S weechat
-sudo pip install setuptools wheel
-sudo pip install websocket-client
+sudo pacman --noconfirm -S python-setuptools python-wheel
+sudo pacman --noconfirm -S python-websocket-client
 mkdir -p ~/.weechat/python/autoload/
 wget -O ~/.weechat/python/autoload/wee_slack.py \
     https://raw.githubusercontent.com/rawdigits/wee-slack/master/wee_slack.py
@@ -50,13 +70,15 @@ mkdir -p ~/projects/go
 
 yaourt --noconfirm -S postman-bin
 
-# TODO: Figure out whether go is even available before executing
-# Metatron
-sudo pacman --noconfirm -S jq curl jre8-openjdk
-curl -sL https://go.netflix.com/metatron-install | bash
+# Netflix Specific Utilities
+if [ "$NETFLIX" = true ] ; then
+    # Metatron
+    sudo pacman --noconfirm -S jq curl jre8-openjdk
+    curl -sL https://go.netflix.com/metatron-install | bash
 
-# Newt
-curl -q -sL 'https://go.netflix.com/newt-install' | bash
+    # Newt
+    curl -q -sL 'https://go.netflix.com/newt-install' | bash
+fi
 
 echo "Backup the original files"
 backup() {
