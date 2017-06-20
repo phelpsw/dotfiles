@@ -10,7 +10,7 @@ sudo pacman --noconfirm -S pass gnupg
 # General file editing
 sudo pacman --noconfirm -S vim meld python python2 python-pip \
     python2-virtualenv screen tmux ipython cmake flake8 python2-flake8 \
-    python-pylint python2-pylint
+    python-pylint python2-pylint strace
 
 # Download Vundle vim package manager and install configured plugins (vimrc)
 mkdir -p ~/.vim/bundle/
