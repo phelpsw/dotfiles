@@ -15,7 +15,7 @@ sudo pacman -Syu
 
 echo "Installing tools"
 # GPG / Password stuff
-sudo pacman --noconfirm -S pass gnupg
+sudo pacman --noconfirm -S pass gnupg pcsclite
 
 # General file editing
 sudo pacman --noconfirm -S vim meld screen tmux
@@ -27,7 +27,7 @@ sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
 # Python Specific Tools
 sudo pacman --noconfirm -S python python2 python-pip python2-pip \
     python2-virtualenv ipython flake8 python2-flake8 python-pylint \
-    python2-pylint
+    python2-pylint jupyter python2-ipykernel
 
 # Download Vundle vim package manager and install configured plugins (vimrc)
 mkdir -p ~/.vim/bundle/
