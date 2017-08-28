@@ -104,7 +104,6 @@ backup ~/.config/redshift.conf
 backup ~/.config/i3/config
 mkdir -p ~/.gnupg/
 backup ~/.gnupg/gpg-agent.conf
-backup ~/.pam_environment
 mkdir -p ~/.local/bin
 backup ~/.local/bin/fuzzy_lock.sh
 mkdir -p ~/.config/i3status/
@@ -130,7 +129,6 @@ link ~/dotfiles/redshift.conf ~/.config/redshift.conf
 link ~/dotfiles/redshift_systemd.conf ~/.config/systemd/user/redshift.service.d/display.conf
 link ~/dotfiles/i3_config ~/.config/i3/config
 link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-link ~/dotfiles/pam_environment ~/.pam_environment
 link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
 link ~/dotfiles/i3status.conf ~/.config/i3status/config
 
