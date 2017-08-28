@@ -98,6 +98,7 @@ backup ~/.screenrc
 backup ~/.vimrc
 backup ~/.tmux.conf
 backup ~/.zshrc
+backup ~/.pam_environment
 backup ~/.ssh/config
 mkdir -p ~/.config/
 backup ~/.config/redshift.conf
@@ -108,6 +109,8 @@ mkdir -p ~/.local/bin
 backup ~/.local/bin/fuzzy_lock.sh
 mkdir -p ~/.config/i3status/
 backup ~/.config/i3status/config
+mkdir -p ~/.config/systemd/user
+backup ~/.config/systemd/user/ssh-agent.service
 
 echo "Symlinking files:"
 link() {
@@ -128,15 +131,20 @@ link ~/dotfiles/zshrc ~/.zshrc
 link ~/dotfiles/redshift.conf ~/.config/redshift.conf
 link ~/dotfiles/redshift_systemd.conf ~/.config/systemd/user/redshift.service.d/display.conf
 link ~/dotfiles/i3_config ~/.config/i3/config
+link ~/dotfiles/pam_environment ~/.pam_environment
 link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
 link ~/dotfiles/i3status.conf ~/.config/i3status/config
+link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 
 # Startup redshift now that config files are in place
 # https://superuser.com/questions/759759/writing-a-service-that-depends-on-xorg
 # Not enabling by default because it isn't setup to start after Xorg is running
 # systemctl --user enable redshift
 systemctl --user start redshift
+
+systemctl --user start ssh-agent.service
+systemctl --user enable ssh-agent.service
 
 # Install Vundle packages and autocompletion vim plugin
 yaourt --noconfirm -S vim-colors-zenburn-git
