@@ -162,9 +162,6 @@ link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 # systemctl --user enable redshift
 systemctl --user start redshift
 
-systemctl --user start ssh-agent.service
-systemctl --user enable ssh-agent.service
-
 # Install Vundle packages and autocompletion vim plugin
 yaourt --noconfirm -S vim-colors-zenburn-git
 vim +PluginInstall +qall
@@ -179,5 +176,8 @@ if [ ! -d ~/.ssh ]; then
     ssh-add
 fi
 link ~/dotfiles/ssh_config ~/.ssh/config
+
+systemctl --user start ssh-agent.service
+systemctl --user enable ssh-agent.service
 
 echo "All done."
