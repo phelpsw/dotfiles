@@ -22,7 +22,8 @@ sudo pacman --noconfirm -S vim meld screen tmux
 
 # Random Development Tools
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
-    python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip
+    python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
+    wireshark-cli
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python2 python-pip python2-pip \
@@ -49,7 +50,8 @@ chsh -s /bin/zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # Image / PDF viewing
-sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip
+sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
+    xautolock
 
 # Weechat: https://github.com/rawdigits/wee-slack
 sudo pacman --noconfirm -S weechat
