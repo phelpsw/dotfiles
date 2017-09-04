@@ -53,14 +53,6 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
     xautolock
 
-# Weechat: https://github.com/rawdigits/wee-slack
-sudo pacman --noconfirm -S weechat
-sudo pacman --noconfirm -S python-setuptools python-wheel
-sudo pacman --noconfirm -S python-websocket-client
-mkdir -p ~/.weechat/python/autoload/
-wget -O ~/.weechat/python/autoload/wee_slack.py \
-    https://raw.githubusercontent.com/rawdigits/wee-slack/master/wee_slack.py
-
 # Redshift screen temp adjustment
 sudo pacman --noconfirm -S redshift
 
@@ -68,9 +60,34 @@ sudo pacman --noconfirm -S redshift
 sudo pacman --noconfirm -S go glide
 mkdir -p ~/projects/go
 
-# TODO: Install yaourt here
+# Install yaourt
+if ! [ -x "$(command -v yaourt)" ]; then
+    mkdir /tmp/yaourt_install
+    pushd /tmp/yaourt_install
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/package-query.tar.gz
+    tar xfz package-query.tar.gz
+    pushd package-query
+    makepkg
+    sudo pacman --noconfirm -U package-query*.pkg.tar.xz
+    popd
 
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt.tar.gz
+    tar xzf yaourt.tar.gz
+    pushd yaourt
+    makepkg
+    sudo pacman -U yaourt*.pkg.tar.xz
+    popd
+    popd
+    rm -Rf /tmp/yaourt_install
+fi
+
+# Install some basic programs available via yaourt
+yaourt --noconfirm -S google-chrome
 yaourt --noconfirm -S postman-bin
+yaourt --noconfirm -S spotify
+yaourt --noconfirm -S dragon-git
+yaourt --noconfirm -S mons
+
 
 # Netflix Specific Utilities
 if [ "$NETFLIX" = true ] ; then
