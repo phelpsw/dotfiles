@@ -75,7 +75,7 @@ if ! [ -x "$(command -v yaourt)" ]; then
     tar xzf yaourt.tar.gz
     pushd yaourt
     makepkg
-    sudo pacman -U yaourt*.pkg.tar.xz
+    sudo pacman --noconfirm -U yaourt*.pkg.tar.xz
     popd
     popd
     rm -Rf /tmp/yaourt_install
