@@ -15,7 +15,7 @@ sudo pacman -Syu
 
 echo "Installing tools"
 # GPG / Password stuff
-sudo pacman --noconfirm -S pass gnupg pcsclite
+sudo pacman --noconfirm -S pass gnupg pcsclite pwgen
 
 # General file editing
 sudo pacman --noconfirm -S vim meld screen tmux
