@@ -20,7 +20,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 
 " Nice looking theme
-Plugin 'jnurmine/Zenburn'
+Plugin 'Zenburn'
 
 " Syntax highlighting
 Plugin 'scrooloose/syntastic'
