@@ -37,7 +37,7 @@ bindsym $mod+Shift+q kill
 
 bindsym Mod1+l exec "~/.local/bin/fuzzy_lock.sh"
 exec xautolock -time 15 -detectsleep -locker '~/.local/bin/fuzzy_lock.sh' &
-exec --no-startup-id redshift-gtk
+exec --no-startup-id redshift
 
 # TODO: Detect lenovo laptop and no attached keyboard
 bindsym XF86AudioMute exec "amixer -q sset Master toggle"
