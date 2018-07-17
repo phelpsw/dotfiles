@@ -173,4 +173,15 @@ link ~/dotfiles/ssh_config ~/.ssh/config
 systemctl --user start ssh-agent.service
 systemctl --user enable ssh-agent.service
 
+# Setting sudo timeout period to 60min and allowing cross tty sudo cred caching
+echo "Please run 'visudo' as root and add the following line:"
+echo "Defaults timestamp_timeout=60,!tty_tickets"
+echo ""
+echo "Please stick a gpg encrypted file called vpncreds.txt.gpg with vpn creds"
+echo "at ~/.config/ containing vpn username and pass.  Also ensure this line"
+echo "in .ovpn config file: auth-user-pass /etc/openvpn/creds/vpncreds.txt"
+echo "Also chmod 600 ~/.config/vpncreds.txt.gpg"
+echo "Also mkdir /etc/openvpn/creds && chown $USER:$USER /etc/openvpn/creds"
+echo ""
+
 echo "All done."

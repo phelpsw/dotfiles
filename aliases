@@ -5,8 +5,8 @@ alias ltr='ls -ltr'
 
 alias sar='ssh pwilliams@quasar'
 alias per='ssh pwilliams@supernova'
-alias vpnen='sudo systemctl start openvpn-client@netflix.service'
-alias vpndis='sudo systemctl stop openvpn-client@netflix.service'
+alias vpnen='~/dotfiles/vpn_enable.sh'
+alias vpndis='~/dotfiles/vpn_disable.sh'
 alias bigb='python2 /home/$USER/projects/bigbertha/bigbertha.py assume'
 alias rgrep='grep -rn'
 
