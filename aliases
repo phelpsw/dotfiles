@@ -12,3 +12,7 @@ alias rgrep='grep -rn'
 
 alias screencap='maim -u -s ~/$(date +%s).png | xclip -selection clipboard -t image/png'
 alias sysupdate='sudo pacman -Syu; yaourt -Sau'
+
+function r53act() {
+    curl -s "http://dnsinfo.app.us-east-1.test.cloud.netflix.net:7001/v1/providers/r53/zones/$1" | jq .aws.account
+}
