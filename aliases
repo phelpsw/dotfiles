@@ -16,3 +16,6 @@ alias sysupdate='sudo pacman -Syu; yaourt -Sau'
 function r53act() {
     curl -s "http://dnsinfo.app.us-east-1.test.cloud.netflix.net:7001/v1/providers/r53/zones/$1" | jq .aws.account
 }
+
+alias roles="newt --app-type awscreds roles"
+alias assume="newt --app-type awscreds refresh -r"
