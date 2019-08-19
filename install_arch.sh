@@ -23,7 +23,7 @@ sudo pacman --noconfirm -S vim meld screen tmux
 # Random Development Tools
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
-    wireshark-cli bind-tools httpie
+    wireshark-cli bind-tools httpie bat prettyping
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python2 python-pip python2-pip \
