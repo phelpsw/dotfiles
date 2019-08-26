@@ -38,9 +38,6 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 sudo pacman --noconfirm -S python-paramiko python-docopt
 sudo pacman --noconfirm -S aws-cli
 
-# VPN
-sudo pacman --noconfirm -S openvpn
-
 # Postgres
 sudo pacman --noconfirm -S postgresql
 
@@ -87,6 +84,11 @@ yaourt --noconfirm -S postman-bin
 yaourt --noconfirm -S spotify
 yaourt --noconfirm -S dragon-git
 yaourt --noconfirm -S mons
+
+# VPN
+sudo pacman --noconfirm -S openvpn
+yaourt --noconfirm -S pulse-secure
+yaourt --noconfirm -S webkitgtk
 
 
 # Netflix Specific Utilities
