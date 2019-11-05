@@ -87,6 +87,7 @@ yaourt --noconfirm -S postman-bin
 yaourt --noconfirm -S spotify
 yaourt --noconfirm -S dragon-git
 yaourt --noconfirm -S mons
+yaourt --noconfirm -S slack-desktop
 
 
 # Netflix Specific Utilities
