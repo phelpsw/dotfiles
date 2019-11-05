@@ -23,7 +23,8 @@ sudo pacman --noconfirm -S vim meld screen tmux
 # Random Development Tools
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
-    wireshark-cli bind-tools httpie bc
+    wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
+    bc
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python2 python-pip python2-pip \
@@ -37,9 +38,6 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # AWS
 sudo pacman --noconfirm -S python-paramiko python-docopt
 sudo pacman --noconfirm -S aws-cli
-
-# VPN
-sudo pacman --noconfirm -S openvpn
 
 # Postgres
 sudo pacman --noconfirm -S postgresql
@@ -88,6 +86,11 @@ yaourt --noconfirm -S spotify
 yaourt --noconfirm -S dragon-git
 yaourt --noconfirm -S mons
 yaourt --noconfirm -S slack-desktop
+
+# VPN
+sudo pacman --noconfirm -S openvpn
+yaourt --noconfirm -S pulse-secure
+yaourt --noconfirm -S webkitgtk
 
 
 # Netflix Specific Utilities
