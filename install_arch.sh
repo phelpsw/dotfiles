@@ -23,7 +23,8 @@ sudo pacman --noconfirm -S vim meld screen tmux
 # Random Development Tools
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
-    wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd
+    wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
+    bc
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python2 python-pip python2-pip \
@@ -54,7 +55,7 @@ sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
 sudo pacman --noconfirm -S redshift
 
 # golang tools
-sudo pacman --noconfirm -S go glide
+sudo pacman --noconfirm -S go glide delve
 mkdir -p ~/projects/go
 
 # Install yaourt
@@ -84,6 +85,7 @@ yaourt --noconfirm -S postman-bin
 yaourt --noconfirm -S spotify
 yaourt --noconfirm -S dragon-git
 yaourt --noconfirm -S mons
+yaourt --noconfirm -S slack-desktop
 
 # VPN
 sudo pacman --noconfirm -S openvpn
