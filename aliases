@@ -22,4 +22,3 @@ alias assume="newt --app-type awscreds refresh -r"
 alias gdig="dig @8.8.8.8"
 
 alias cat="bat --plain"
-alias ping='prettyping --nolegend'
