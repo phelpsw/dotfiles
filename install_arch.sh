@@ -24,12 +24,11 @@ sudo pacman --noconfirm -S vim meld screen tmux
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
     wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
-    bc
+    bc wget man-db
 
 # Python Specific Tools
-sudo pacman --noconfirm -S python python2 python-pip python2-pip \
-    python2-virtualenv ipython flake8 python2-flake8 python-pylint \
-    python2-pylint jupyter python2-ipykernel
+sudo pacman --noconfirm -S python python-pip ipython flake8 python-pylint \
+    jupyter
 
 # Download Vundle vim package manager and install configured plugins (vimrc)
 mkdir -p ~/.vim/bundle/
@@ -39,58 +38,39 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 sudo pacman --noconfirm -S python-paramiko python-docopt
 sudo pacman --noconfirm -S aws-cli
 
-# Postgres
-sudo pacman --noconfirm -S postgresql
-
 # zsh
 sudo pacman --noconfirm -S zsh
 chsh -s /bin/zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --unattended"
 
 # Image / PDF viewing
-sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
-    xautolock
+#sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
+#    xautolock
 
-# Redshift screen temp adjustment
-sudo pacman --noconfirm -S redshift
-
-# golang tools
-sudo pacman --noconfirm -S go glide delve
-mkdir -p ~/projects/go
-
-# Install yaourt
-if ! [ -x "$(command -v yaourt)" ]; then
-    mkdir /tmp/yaourt_install
-    pushd /tmp/yaourt_install
-    wget https://aur.archlinux.org/cgit/aur.git/snapshot/package-query.tar.gz
-    tar xfz package-query.tar.gz
-    pushd package-query
-    makepkg
-    sudo pacman --noconfirm -U package-query*.pkg.tar.xz
-    popd
-
-    wget https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt.tar.gz
-    tar xzf yaourt.tar.gz
-    pushd yaourt
-    makepkg
-    sudo pacman --noconfirm -U yaourt*.pkg.tar.xz
-    popd
-    popd
-    rm -Rf /tmp/yaourt_install
+# Install yay
+if ! [ -x "$(command -v yay)" ]; then
+	mkdir /tmp/yay_install
+	pushd /tmp/yay_install
+	git clone https://aur.archlinux.org/yay.git
+	pushd yay
+	makepkg
+	popd
+	popd
+	rm -Rf /tmp/yay_install
 fi
 
-# Install some basic programs available via yaourt
-yaourt --noconfirm -S google-chrome
-yaourt --noconfirm -S postman-bin
-yaourt --noconfirm -S spotify
-yaourt --noconfirm -S dragon-git
-yaourt --noconfirm -S mons
-yaourt --noconfirm -S slack-desktop
+# Install some basic programs available via yay
+yay --noconfirm -S j4-dmenu-desktop
+sudo pacman --noconfirm -S firefox
+yay --noconfirm -S google-chrome
+yay --noconfirm -S spotify
+yay --noconfirm -S dragon-drag-and-drop-git
+yay --noconfirm -S slack-desktop
 
 # VPN
 sudo pacman --noconfirm -S openvpn
-yaourt --noconfirm -S pulse-secure
-yaourt --noconfirm -S webkitgtk
+#yaourt --noconfirm -S pulse-secure
+#yaourt --noconfirm -S webkitgtk
 
 
 # Netflix Specific Utilities
@@ -123,15 +103,16 @@ backup ~/.tmux.conf
 backup ~/.zshrc
 backup ~/.pam_environment
 backup ~/.ssh/config
-mkdir -p ~/.config/
-backup ~/.config/redshift.conf
-backup ~/.config/i3/config
+#mkdir -p ~/.config/
+#backup ~/.config/i3/config
+mkdir -p ~/.config/sway/
+backup ~/.config/sway/config
 mkdir -p ~/.gnupg/
 backup ~/.gnupg/gpg-agent.conf
-mkdir -p ~/.local/bin
-backup ~/.local/bin/fuzzy_lock.sh
-mkdir -p ~/.config/i3status/
-backup ~/.config/i3status/config
+#mkdir -p ~/.local/bin
+#backup ~/.local/bin/fuzzy_lock.sh
+#mkdir -p ~/.config/i3status/
+#backup ~/.config/i3status/config
 mkdir -p ~/.config/systemd/user
 backup ~/.config/systemd/user/ssh-agent.service
 
@@ -151,16 +132,17 @@ link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
-link ~/dotfiles/redshift.conf ~/.config/redshift.conf
-link ~/dotfiles/i3_config ~/.config/i3/config
+#link ~/dotfiles/redshift.conf ~/.config/redshift.conf
+#link ~/dotfiles/i3_config ~/.config/i3/config
+link ~/dotfiles/sway_config ~/.config/sway/config
 link ~/dotfiles/pam_environment ~/.pam_environment
 link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
-link ~/dotfiles/i3status.conf ~/.config/i3status/config
+#link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
+#link ~/dotfiles/i3status.conf ~/.config/i3status/config
 link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 
 # Install Vundle packages and autocompletion vim plugin
-yaourt --noconfirm -S vim-colors-zenburn-git
+yay --noconfirm -S vim-colors-zenburn-git
 vim +PluginInstall +qall
 vim +GoInstallBinaries +qall
 pushd ~/.vim/bundle/YouCompleteMe
