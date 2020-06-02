@@ -16,7 +16,7 @@ sudo pacman -Syu
 echo "Installing tools"
 
 # Fonts
-sudo pacman -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
+sudo pacman --noconfirm -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
     ttf-ubuntu-font-family ttf-fira-code adobe-source-code-pro-fonts \
     ttf-freefont noto-fonts-cjk adobe-source-han-sans-otc-fonts \
     noto-fonts-emoji
@@ -57,25 +57,28 @@ sudo pacman --noconfirm -S zsh
 chsh -s /bin/zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --unattended"
 
+# Browser
+sudo pacman --noconfirm -S firefox
+
 # Image / PDF viewing
 #sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
 #    xautolock
 
 # Install yay
 if ! [ -x "$(command -v yay)" ]; then
-	mkdir /tmp/yay_install
-	pushd /tmp/yay_install
-	git clone https://aur.archlinux.org/yay.git
-	pushd yay
-	makepkg
-	popd
-	popd
-	rm -Rf /tmp/yay_install
+    echo "Installing yay"
+    sudo pacman --noconfirm -S go
+    mkdir /tmp/yay_install
+    pushd /tmp/yay_install
+    git clone https://aur.archlinux.org/yay.git
+    pushd yay
+    makepkg -si --noconfirm
+    popd
+    popd
+    rm -Rf /tmp/yay_install
 fi
 
 # Install some basic programs available via yay
-yay --noconfirm -S j4-dmenu-desktop
-sudo pacman --noconfirm -S firefox
 yay --noconfirm -S google-chrome
 yay --noconfirm -S spotify
 yay --noconfirm -S dragon-drag-and-drop-git
@@ -85,9 +88,10 @@ yay --noconfirm -S thefuck
 yay --noconfirm -S vlc-git
 yay --noconfirm -S libreoffice-fresh
 yay --noconfirm -S gitkraken
+yay --noconfirm -S j4-dmenu-desktop
 
 # IDE
-yay -S vscodium-bin pycharm-professional goland
+yay --noconfirm -S vscodium-bin pycharm-professional goland
 
 # vscode plugins
 #vscodium --install-extension ms-python.python
