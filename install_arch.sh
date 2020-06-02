@@ -14,6 +14,14 @@ done
 sudo pacman -Syu
 
 echo "Installing tools"
+
+# Fonts
+sudo pacman -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
+    ttf-ubuntu-font-family ttf-fira-code adobe-source-code-pro-fonts \
+    ttf-freefont noto-fonts-cjk adobe-source-han-sans-otc-fonts \
+    noto-fonts-emoji
+# Check out https://www.reddit.com/r/archlinux/comments/5r5ep8/make_your_arch_fonts_beautiful_easily/
+
 # GPG / Password stuff
 sudo pacman --noconfirm -S pass gnupg pcsclite pwgen
 
@@ -24,7 +32,7 @@ sudo pacman --noconfirm -S vim meld screen tmux
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
     wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
-    bc wget man-db
+    bc wget man-db tldr
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python-pip ipython flake8 python-pylint \
@@ -37,6 +45,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # AWS
 sudo pacman --noconfirm -S python-paramiko python-docopt
 sudo pacman --noconfirm -S aws-cli
+
+# Docker
+sudo pacman --noconfirm -S docker
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo gpasswd -a phelps docker
 
 # zsh
 sudo pacman --noconfirm -S zsh
@@ -66,6 +80,17 @@ yay --noconfirm -S google-chrome
 yay --noconfirm -S spotify
 yay --noconfirm -S dragon-drag-and-drop-git
 yay --noconfirm -S slack-desktop
+yay --noconfirm -S find-the-command
+yay --noconfirm -S thefuck
+yay --noconfirm -S vlc-git
+yay --noconfirm -S libreoffice-fresh
+yay --noconfirm -S gitkraken
+
+# IDE
+yay -S vscodium-bin pycharm-professional goland
+
+# vscode plugins
+#vscodium --install-extension ms-python.python
 
 # VPN
 sudo pacman --noconfirm -S openvpn
