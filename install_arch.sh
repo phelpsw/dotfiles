@@ -26,7 +26,7 @@ sudo pacman --noconfirm -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
 sudo pacman --noconfirm -S pass gnupg pcsclite pwgen
 
 # General file editing
-sudo pacman --noconfirm -S vim meld screen tmux
+sudo pacman --noconfirm -S vi vim meld screen tmux
 
 # Random Development Tools
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
@@ -98,6 +98,7 @@ yay --noconfirm -S vscodium-bin pycharm-professional goland
 
 # VPN
 sudo pacman --noconfirm -S openvpn
+yay --noconfirm -S openvpn-update-resolv-conf
 #yaourt --noconfirm -S pulse-secure
 #yaourt --noconfirm -S webkitgtk
 
@@ -178,7 +179,8 @@ pushd ~/.vim/bundle/YouCompleteMe
 python ./install.py
 popd
 
-if [ ! -d ~/.ssh ]; then
+mkdir -p ~/.ssh/
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
     mkdir ~/.ssh
     ssh-keygen -b 4096 -o -a 100 -t rsa
     #ssh-add # Not clear whether this is needed or not 6/1/2020
@@ -192,11 +194,15 @@ systemctl --user enable ssh-agent.service
 echo "Please run 'visudo' as root and add the following line:"
 echo "Defaults timestamp_timeout=60,!tty_tickets"
 echo ""
-echo "Please stick a gpg encrypted file called vpncreds.txt.gpg with vpn creds"
-echo "at ~/.config/ containing vpn username and pass.  Also ensure this line"
-echo "in .ovpn config file: auth-user-pass /etc/openvpn/creds/vpncreds.txt"
-echo "Also chmod 600 ~/.config/vpncreds.txt.gpg"
-echo "Also mkdir /etc/openvpn/creds && chown $USER:$USER /etc/openvpn/creds"
+echo "Setup local gpg keys"
+echo ""
+echo "Create file called vpncreds.txt with vpn creds at ~/.config/vpncreds.txt"
+echo "containing vpn username and pass on two lines."
+echo ""
+echo "gpg --encrypt -r phelps@williamslabs.com ~/.config/vpncreds.txt"
+echo "rm ~/.config/vpncreds.txt"
+echo "sudo mkdir /etc/openvpn/creds/"
+echo "chown $USER:$USER /etc/openvpn/creds"
 echo ""
 
 echo "All done."
