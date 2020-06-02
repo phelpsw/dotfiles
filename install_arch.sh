@@ -152,7 +152,7 @@ popd
 if [ ! -d ~/.ssh ]; then
     mkdir ~/.ssh
     ssh-keygen -b 4096 -o -a 100 -t rsa
-    ssh-add
+    #ssh-add # Not clear whether this is needed or not 6/1/2020
 fi
 link ~/dotfiles/ssh_config ~/.ssh/config
 
