@@ -89,6 +89,7 @@ yay --noconfirm -S vlc-git
 yay --noconfirm -S libreoffice-fresh
 yay --noconfirm -S gitkraken
 yay --noconfirm -S j4-dmenu-desktop
+yay --noconfirm -S dropbox
 
 # IDE
 yay --noconfirm -S vscodium-bin pycharm-professional goland
@@ -203,6 +204,8 @@ echo "gpg --encrypt -r phelps@williamslabs.com ~/.config/vpncreds.txt"
 echo "rm ~/.config/vpncreds.txt"
 echo "sudo mkdir /etc/openvpn/creds/"
 echo "chown $USER:$USER /etc/openvpn/creds"
+echo ""
+echo "Setup dropbox by running 'dropbox' and entering creds"
 echo ""
 
 echo "All done."
