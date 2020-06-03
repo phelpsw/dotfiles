@@ -226,9 +226,9 @@ bar {
 # https://bytee.net/blog/screenshots-with-sway-and-grim
 #
 # Take a screenshot with all output and save it into screenshots
-bindsym Print exec grim -t jpeg ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym Print exec grim -t png ~/screenshots/$(date +%s).png
 
 # Take a Screenshot with the region select
-bindsym $mod+Print exec grim -t jpeg -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+Print exec grim -t png -g "$(slurp)" ~/screenshots/$(date +%s).png
 
 include /etc/sway/config.d/*
