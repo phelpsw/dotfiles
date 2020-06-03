@@ -7,7 +7,6 @@ alias vpnen='~/dotfiles/vpn_enable.sh'
 alias vpndis='~/dotfiles/vpn_disable.sh'
 alias rgrep='grep -rn'
 
-alias screencap='maim -u -s ~/$(date +%s).png | xclip -selection clipboard -t image/png'
 alias sysupdate='sudo pacman -Syu; yay -Syu'
 
 function r53act() {
