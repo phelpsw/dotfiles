@@ -63,6 +63,7 @@ sudo pacman --noconfirm -S firefox
 # Image / PDF viewing
 #sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
 #    xautolock
+sudo pacman --noconfirm -S grim slurp
 
 # Install yay
 if ! [ -x "$(command -v yay)" ]; then
