@@ -32,7 +32,7 @@ sudo pacman --noconfirm -S vi vim meld screen tmux
 sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
     wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
-    bc wget man-db tldr
+    bc wget man-db tldr intel-gpu-tools
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python-pip ipython flake8 python-pylint \
