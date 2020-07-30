@@ -15,6 +15,9 @@ sudo pacman -Syu
 
 echo "Installing tools"
 
+# Window Manager Related
+sudo pacman --noconfirm -S swaylock swayidle mako
+
 # Fonts
 sudo pacman --noconfirm -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
     ttf-ubuntu-font-family ttf-fira-code adobe-source-code-pro-fonts \
@@ -91,6 +94,7 @@ yay --noconfirm -S libreoffice-fresh
 yay --noconfirm -S gitkraken
 yay --noconfirm -S j4-dmenu-desktop
 yay --noconfirm -S dropbox
+yay --noconfirm -S postman
 
 # IDE
 yay --noconfirm -S vscodium-bin pycharm-professional goland
