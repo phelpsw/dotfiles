@@ -15,8 +15,8 @@ sudo pacman -Syu
 
 echo "Installing tools"
 
-# Window Manager Related
-sudo pacman --noconfirm -S swaylock swayidle mako
+# Wayland / Sway Window Manager Related
+#sudo pacman --noconfirm -S swaylock swayidle mako
 
 # Fonts
 sudo pacman --noconfirm -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
@@ -32,10 +32,10 @@ sudo pacman --noconfirm -S pass gnupg pcsclite pwgen
 sudo pacman --noconfirm -S vi vim meld screen tmux
 
 # Random Development Tools
-sudo pacman --noconfirm -S strace lsof nmap whois cmake ntop iperf gnu-netcat \
+sudo pacman --noconfirm -S strace lsof nmap whois cmake iperf gnu-netcat \
     python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
     wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
-    bc wget man-db tldr intel-gpu-tools
+    bc wget man-db tldr intel-gpu-tools vdpauinfo libva-utils
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python-pip ipython flake8 python-pylint \
@@ -64,9 +64,14 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 sudo pacman --noconfirm -S firefox
 
 # Image / PDF viewing
-#sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
-#    xautolock
-sudo pacman --noconfirm -S grim slurp
+sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
+    xautolock
+
+# Redshift screen temp adjustment
+sudo pacman --noconfirm -S redshift
+
+# Sway / Wayland screenshot tools
+#sudo pacman --noconfirm -S grim slurp
 
 # Install yay
 if ! [ -x "$(command -v yay)" ]; then
@@ -85,14 +90,14 @@ fi
 # Install some basic programs available via yay
 yay --noconfirm -S google-chrome
 yay --noconfirm -S spotify
-yay --noconfirm -S dragon-drag-and-drop-git
+#yay --noconfirm -S dragon-drag-and-drop-git # Wayland only
 yay --noconfirm -S slack-desktop
 yay --noconfirm -S find-the-command
 yay --noconfirm -S thefuck
 yay --noconfirm -S vlc-git
 yay --noconfirm -S libreoffice-fresh
 yay --noconfirm -S gitkraken
-yay --noconfirm -S j4-dmenu-desktop
+#yay --noconfirm -S j4-dmenu-desktop # Sway / Wayland only
 yay --noconfirm -S dropbox
 yay --noconfirm -S postman
 
@@ -102,11 +107,14 @@ yay --noconfirm -S vscodium-bin pycharm-professional goland
 # vscode plugins
 #vscodium --install-extension ms-python.python
 
-# VPN
+# OpenVPN
 sudo pacman --noconfirm -S openvpn
 yay --noconfirm -S openvpn-update-resolv-conf
-#yaourt --noconfirm -S pulse-secure
-#yaourt --noconfirm -S webkitgtk
+
+# Pulse Secure VPN
+sudo pacman --noconfirm -S gtkmm3 webkit2gtk
+yay --noconfirm -S webkitgtk-bin
+yay --noconfirm -S pulse-secure
 
 
 # Netflix Specific Utilities
@@ -139,16 +147,16 @@ backup ~/.tmux.conf
 backup ~/.zshrc
 backup ~/.pam_environment
 backup ~/.ssh/config
-#mkdir -p ~/.config/
-#backup ~/.config/i3/config
-mkdir -p ~/.config/sway/
-backup ~/.config/sway/config
+mkdir -p ~/.config/i3/ # Xorg
+backup ~/.config/i3/config # Xorg
+#mkdir -p ~/.config/sway/ # Wayland
+#backup ~/.config/sway/config # Wayland
 mkdir -p ~/.gnupg/
 backup ~/.gnupg/gpg-agent.conf
-#mkdir -p ~/.local/bin
-#backup ~/.local/bin/fuzzy_lock.sh
-#mkdir -p ~/.config/i3status/
-#backup ~/.config/i3status/config
+mkdir -p ~/.local/bin # Xorg
+backup ~/.local/bin/fuzzy_lock.sh # Xorg
+mkdir -p ~/.config/i3status/ # Xorg
+backup ~/.config/i3status/config # Xorg
 mkdir -p ~/.config/systemd/user
 backup ~/.config/systemd/user/ssh-agent.service
 
@@ -168,13 +176,13 @@ link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
-#link ~/dotfiles/redshift.conf ~/.config/redshift.conf
-#link ~/dotfiles/i3_config ~/.config/i3/config
-link ~/dotfiles/sway_config ~/.config/sway/config
+link ~/dotfiles/redshift.conf ~/.config/redshift.conf # Xorg
+link ~/dotfiles/i3_config ~/.config/i3/config # Xorg
+#link ~/dotfiles/sway_config ~/.config/sway/config # Wayland
 link ~/dotfiles/pam_environment ~/.pam_environment
 link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-#link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh
-#link ~/dotfiles/i3status.conf ~/.config/i3status/config
+link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh # Xorg
+link ~/dotfiles/i3status.conf ~/.config/i3status/config # Xorg
 link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 
 # Install Vundle packages and autocompletion vim plugin
