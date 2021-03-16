@@ -102,7 +102,7 @@ yay --noconfirm -S dropbox
 yay --noconfirm -S postman
 
 # IDE
-yay --noconfirm -S vscodium-bin pycharm-professional goland
+yay --noconfirm -S visual-studio-code-bin pycharm-professional goland
 
 # vscode plugins
 #vscodium --install-extension ms-python.python
