@@ -15,6 +15,9 @@ sudo pacman -Syu
 
 echo "Installing tools"
 
+# Audio
+sudo pacman --noconfirm -S pulseaudio
+
 # Wayland / Sway Window Manager Related
 #sudo pacman --noconfirm -S swaylock swayidle mako
 
@@ -29,7 +32,7 @@ sudo pacman --noconfirm -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
 sudo pacman --noconfirm -S pass gnupg pcsclite pwgen
 
 # General file editing
-sudo pacman --noconfirm -S vi vim meld screen tmux
+sudo pacman --noconfirm -S vi vim meld screen tmux jq
 
 # Random Development Tools
 sudo pacman --noconfirm -S strace lsof nmap whois cmake iperf gnu-netcat \
@@ -120,7 +123,7 @@ yay --noconfirm -S pulse-secure
 # Netflix Specific Utilities
 if [ "$NETFLIX" = true ] ; then
     # Metatron
-    sudo pacman --noconfirm -S jq curl jre8-openjdk
+    sudo pacman --noconfirm -S curl jre8-openjdk
     curl -sL https://go.netflix.com/metatron-install | bash
 
     # Newt
