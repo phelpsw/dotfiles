@@ -93,3 +93,7 @@ eval $(thefuck --alias)
 
 # Pull in aliases
 source $HOME/.aliases
+
+# Python local path
+mkdir -p ~/.local/bin
+export PATH=~/.local/bin:$PATH
