@@ -89,8 +89,6 @@ export PATH=$GOPATH:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-eval $(thefuck --alias)
-
 # Pull in aliases
 source $HOME/.aliases
 
