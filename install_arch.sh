@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script is now configured for supporting Manjaro Sway edition
+# https://github.com/manjaro-sway/manjaro-sway
+
 # Determine environment specifics
 NETFLIX=false
 echo "Install Netflix tools (requires Netflix network)?"
@@ -15,30 +18,15 @@ sudo pacman -Syu
 
 echo "Installing tools"
 
-# Audio
-sudo pacman --noconfirm -S pulseaudio
-
-# Wayland / Sway Window Manager Related
-#sudo pacman --noconfirm -S swaylock swayidle mako
-
-# Fonts
-sudo pacman --noconfirm -S ttf-droid ttf-roboto noto-fonts ttf-liberation \
-    ttf-ubuntu-font-family ttf-fira-code adobe-source-code-pro-fonts \
-    ttf-freefont noto-fonts-cjk adobe-source-han-sans-otc-fonts \
-    noto-fonts-emoji
-# Check out https://www.reddit.com/r/archlinux/comments/5r5ep8/make_your_arch_fonts_beautiful_easily/
-
 # GPG / Password stuff
-sudo pacman --noconfirm -S pass gnupg pcsclite pwgen
+sudo pacman --noconfirm -S pass pwgen
 
 # General file editing
-sudo pacman --noconfirm -S vi vim meld screen tmux jq
-
+sudo pacman --noconfirm -S vim meld screen
+ 
 # Random Development Tools
-sudo pacman --noconfirm -S strace lsof nmap whois cmake iperf gnu-netcat \
-    python-pyasn1 python-yaml mitmproxy wavemon graphviz unzip openssh htop \
-    wireshark-cli bind-tools httpie bat prettyping fzy the_silver_searcher fd \
-    bc wget man-db tldr intel-gpu-tools vdpauinfo libva-utils zip
+sudo pacman --noconfirm -S strace whois wireshark-qt wireshark-cli bind-tools \
+    httpie bat prettyping the_silver_searcher fd tldr
 
 # Python Specific Tools
 sudo pacman --noconfirm -S python python-pip ipython flake8 python-pylint \
