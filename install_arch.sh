@@ -28,94 +28,42 @@ sudo pacman --noconfirm -S vim meld screen
 sudo pacman --noconfirm -S strace whois wireshark-qt wireshark-cli bind-tools \
     httpie bat prettyping the_silver_searcher fd tldr
 
-# Python Specific Tools
-sudo pacman --noconfirm -S python python-pip ipython flake8 python-pylint \
-    jupyter
-
-# Download Vundle vim package manager and install configured plugins (vimrc)
-mkdir -p ~/.vim/bundle/
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 # AWS
-sudo pacman --noconfirm -S python-paramiko python-docopt
 sudo pacman --noconfirm -S aws-cli
 
 # Docker
 sudo pacman --noconfirm -S docker
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
-sudo gpasswd -a phelps docker
-
-# zsh
-sudo pacman --noconfirm -S zsh
-chsh -s /bin/zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --unattended"
-
-# Browser
-sudo pacman --noconfirm -S firefox
-
-# Image / PDF viewing
-sudo pacman --noconfirm -S feh zathura-pdf-mupdf maim xclip imagemagick \
-    xautolock
-
-# Redshift screen temp adjustment
-sudo pacman --noconfirm -S redshift
-
-# Sway / Wayland screenshot tools
-#sudo pacman --noconfirm -S grim slurp
-
-# Install yay
-if ! [ -x "$(command -v yay)" ]; then
-    echo "Installing yay"
-    sudo pacman --noconfirm -S go
-    mkdir /tmp/yay_install
-    pushd /tmp/yay_install
-    git clone https://aur.archlinux.org/yay.git
-    pushd yay
-    makepkg -si --noconfirm
-    popd
-    popd
-    rm -Rf /tmp/yay_install
-fi
+sudo gpasswd -a $USER docker
 
 # Install some basic programs available via yay
-yay --noconfirm -S google-chrome
-yay --noconfirm -S spotify
-#yay --noconfirm -S dragon-drag-and-drop-git # Wayland only
-yay --noconfirm -S slack-desktop
-yay --noconfirm -S find-the-command
-yay --noconfirm -S thefuck
-yay --noconfirm -S vlc-git
-yay --noconfirm -S libreoffice-fresh
-yay --noconfirm -S gitkraken
-#yay --noconfirm -S j4-dmenu-desktop # Sway / Wayland only
-yay --noconfirm -S dropbox
-yay --noconfirm -S postman
+yay --noconfirm -S google-chrome spotify
 
 # IDE
-yay --noconfirm -S visual-studio-code-bin pycharm-professional goland
+yay --noconfirm -S visual-studio-code-bin
 
 # vscode plugins
-#vscodium --install-extension ms-python.python
-
-# OpenVPN
-sudo pacman --noconfirm -S openvpn
-yay --noconfirm -S openvpn-update-resolv-conf
+code --install-extension ms-python.python
+code --install-extension Tanh.hjson-formatter
+code --install-extension laktak.hjson
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 
 # Pulse Secure VPN
 sudo pacman --noconfirm -S gtkmm3 webkit2gtk
-yay --noconfirm -S webkitgtk-bin
 yay --noconfirm -S pulse-secure
-
+sudo systemctl start pulsesecure
+sudo systemctl enable pulsesecure
+sudo /opt/pulsesecure/bin/setup_cef.sh install
 
 # Netflix Specific Utilities
 if [ "$NETFLIX" = true ] ; then
     # Metatron
-    sudo pacman --noconfirm -S curl jre8-openjdk
-    curl -sL https://go.netflix.com/metatron-install | bash
+    curl -q -sL 'https://go.prod.netflix.net/metatron-install' | bash
 
     # Newt
-    curl -q -sL 'https://go.netflix.com/newt-install' | bash
+    curl -q -sL 'https://go.prod.netflix.net/newt-install' | bash
 fi
 
 echo "Backup the original files"
@@ -176,14 +124,6 @@ link ~/dotfiles/fuzzy_lock.sh ~/.local/bin/fuzzy_lock.sh # Xorg
 link ~/dotfiles/i3status.conf ~/.config/i3status/config # Xorg
 link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 
-# Install Vundle packages and autocompletion vim plugin
-yay --noconfirm -S vim-colors-zenburn-git
-vim +PluginInstall +qall
-vim +GoInstallBinaries +qall
-pushd ~/.vim/bundle/YouCompleteMe
-python ./install.py
-popd
-
 mkdir -p ~/.ssh/
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     mkdir ~/.ssh
@@ -194,22 +134,5 @@ link ~/dotfiles/ssh_config ~/.ssh/config
 
 systemctl --user start ssh-agent.service
 systemctl --user enable ssh-agent.service
-
-# Setting sudo timeout period to 60min and allowing cross tty sudo cred caching
-echo "Please run 'visudo' as root and add the following line:"
-echo "Defaults timestamp_timeout=60,!tty_tickets"
-echo ""
-echo "Setup local gpg keys"
-echo ""
-echo "Create file called vpncreds.txt with vpn creds at ~/.config/vpncreds.txt"
-echo "containing vpn username and pass on two lines."
-echo ""
-echo "gpg --encrypt -r phelps@williamslabs.com ~/.config/vpncreds.txt"
-echo "rm ~/.config/vpncreds.txt"
-echo "sudo mkdir /etc/openvpn/creds/"
-echo "chown $USER:$USER /etc/openvpn/creds"
-echo ""
-echo "Setup dropbox by running 'dropbox' and entering creds"
-echo ""
 
 echo "All done."
