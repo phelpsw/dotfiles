@@ -5,3 +5,5 @@ alias sysupdate='sudo pacman -Syu; yay -Syu'
 
 alias roles="newt --app-type awscreds roles"
 alias assume="newt --app-type awscreds refresh -r"
+
+function pass2() { PASSWORD_STORE_DIR=$HOME/.password-store-sec/ bash -c "pass $*"; }
