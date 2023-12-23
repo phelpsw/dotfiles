@@ -1,14 +1,14 @@
 [user]
     name = Phelps Williams
-	email = phelps@netflix.com
+    email = phelps@netflix.com
 
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+    diff = auto
+    status = auto
+    branch = auto
 
 [core]
-	editor = vim
+    editor = vim
 
 [push]
     default = current

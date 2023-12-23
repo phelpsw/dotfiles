@@ -1,58 +1,70 @@
 #!/usr/bin/env bash
 
+# This script is now configured for supporting Manjaro Sway edition
+# https://github.com/manjaro-sway/manjaro-sway
+
+# Determine environment specifics
+NETFLIX=false
+echo "Install Netflix tools (requires Netflix network)?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) NETFLIX=true; break;;
+        No ) break;;
+    esac
+done
+
+# Update pacman
+sudo pacman -Syu
+
 echo "Installing tools"
+
 # GPG / Password stuff
-sudo apt-get install pass gnupg gnupg-agent
+sudo pacman --noconfirm -S pass pwgen
 
 # General file editing
-sudo apt-get install vim vim-doc meld exuberant-ctags python-pip virtualenv \
-    screen tmux ipython cmake build-essential python-dev python3-dev golang \
-    flake8 pylint pylint3
-
-# Download Vundle vim package manager
-mkdir -p ~/.vim/bundle/
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+sudo pacman --noconfirm -S neovim meld screen
+ 
+# Random Development Tools
+sudo pacman --noconfirm -S strace whois wireshark-qt wireshark-cli bind-tools \
+    httpie bat prettyping the_silver_searcher fd tldr github-cli
 
 # AWS
-pip install docopt paramiko
-sudo apt-get install awscli
+sudo pacman --noconfirm -S aws-cli
 
-# SQL
-sudo apt-get install mysql-workbench
+# Docker
+sudo pacman --noconfirm -S docker
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo gpasswd -a $USER docker
 
-# VPN
-sudo apt-get install openvpn
+# Install some basic programs available via yay
+yay --noconfirm -S google-chrome spotify
 
-# zsh
-sudo apt-get install zsh zsh-common
-chsh -s /bin/zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+# IDE
+yay --noconfirm -S visual-studio-code-bin
 
-# Other
-# Weechat: https://github.com/rawdigits/wee-slack
-sudo apt-get install weechat weechat-plugins
-sudo apt-get install redshift-gtk
-pip install setuptools wheel
-pip install websocket-client
+# vscode plugins
+code --install-extension ms-python.python
+code --install-extension Tanh.hjson-formatter
+code --install-extension laktak.hjson
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 
-mkdir -p ~/.weechat/python/autoload/
-wget -O ~/.weechat/python/autoload/wee_slack.py \
-    https://raw.githubusercontent.com/rawdigits/wee-slack/master/wee_slack.py
+# Pulse Secure VPN
+sudo pacman --noconfirm -S gtkmm3 webkit2gtk
+yay --noconfirm -S pulse-secure
+sudo systemctl start pulsesecure
+sudo systemctl enable pulsesecure
+sudo /opt/pulsesecure/bin/setup_cef.sh install
 
-# Music
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update
-sudo apt-get install spotify-client
+# Netflix Specific Utilities
+if [ "$NETFLIX" = true ] ; then
+    # Metatron
+    curl -q -sL 'https://go.prod.netflix.net/metatron-install' | bash
 
-
-# Netflix
-sudo sh -c 'echo "deb http://artifacts.netflix.com/debian-local nflx main" >> /etc/apt/sources.list.d/netflix.list'
-sudo apt-get update
-sudo apt-get --allow-unauthenticated install metatron-cli
-sudo sed -i 's/deb http/#deb http/g' /etc/apt/sources.list.d/netflix.list
-sudo apt-get update
-metatron refresh
+    # Newt
+    curl -q -sL 'https://go.prod.netflix.net/newt-install' | bash
+fi
 
 echo "Backup the original files"
 backup() {
@@ -65,15 +77,25 @@ backup() {
     fi
 }
 
-backup ~/.bash_aliases
+# Removing this file fixes a vscode wayland issue
+backup ~/.config/code-flags.conf
+#backup ~/.aliases
 backup ~/.gitconfig
 backup ~/.gitignore
 backup ~/.screenrc
 backup ~/.vimrc
 backup ~/.tmux.conf
 backup ~/.zshrc
-mkdir -p ~/.config/
-backup ~/.config/redshift.conf
+backup ~/.pam_environment
+backup ~/.ssh/config
+mkdir -p ~/.gnupg/
+backup ~/.gnupg/gpg-agent.conf
+mkdir -p ~/.local/bin # Xorg
+backup ~/.local/bin/fuzzy_lock.sh # Xorg
+mkdir -p ~/.config/i3status/ # Xorg
+backup ~/.config/i3status/config # Xorg
+mkdir -p ~/.config/systemd/user
+backup ~/.config/systemd/user/ssh-agent.service
 
 echo "Symlinking files:"
 link() {
@@ -84,31 +106,29 @@ link() {
     ln -s "$from" "$to"
 }
 
-link ~/dotfiles/bash_aliases ~/.bash_aliases
+link $PWD/sway/customconf.conf ~/.config/sway/config.d/customconf.conf
+link $PWD/sway/customdefs.conf ~/.config/sway/definitions.d/customdefs.conf
+link $PWD/sway/waybar_config.jsonc ~/.config/waybar/config.jsonc
+link $PWD/aliases ~/.config/zsh/config.d/other_aliases
 link ~/dotfiles/gitconfig ~/.gitconfig
 link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
 link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
 link ~/dotfiles/zshrc ~/.zshrc
-link ~/dotfiles/redshift.conf ~/.config/redshift.conf
+link ~/dotfiles/pam_environment ~/.pam_environment
+link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 
-# Install Vundle packages and autocompletion vim plugin
-vim +PluginInstall +qall
-pushd ~/.vim/bundle/YouCompleteMe
-python ./install.py
-popd
-
-# It seems the gnome keyring messes with the ssh-agent.  Uninstalling it helped
-# with a linux mint 18 cinnamon install (after restarting)
-# sudo apt-get autoremove gnome-keyring
-# This screwed up storing of network creds which was really annoying so
-# reversed this out...although it seems to have uninstalled something important.
-if [ ! -d ~/.ssh ]; then
+mkdir -p ~/.ssh/
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
     mkdir ~/.ssh
     ssh-keygen -b 4096 -o -a 100 -t rsa
-    ssh-add
+    #ssh-add # Not clear whether this is needed or not 6/1/2020
 fi
 link ~/dotfiles/ssh_config ~/.ssh/config
+
+systemctl --user start ssh-agent.service
+systemctl --user enable ssh-agent.service
 
 echo "All done."
