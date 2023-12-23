@@ -1,19 +1,7 @@
-# ls aliases
-alias ll='ls -l'
-alias la='ls -a'
-alias ltr='ls -ltr'
+alias vim='nvim'
+alias rgrep='ag'
 
-alias vpnen='~/dotfiles/vpn_enable.sh'
-alias vpndis='~/dotfiles/vpn_disable.sh'
-alias rgrep='grep -rn'
-
-alias screencap='maim -u -s ~/$(date +%s).png | xclip -selection clipboard -t image/png'
 alias sysupdate='sudo pacman -Syu; yay -Syu'
-
-function r53act() {
-    curl -s "http://dnsinfo.app.us-east-1.test.cloud.netflix.net:7001/v1/providers/r53/zones/$1" | jq .aws.account
-}
 
 alias roles="newt --app-type awscreds roles"
 alias assume="newt --app-type awscreds refresh -r"
-alias gdig="dig @8.8.8.8"
