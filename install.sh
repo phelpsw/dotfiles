@@ -22,11 +22,11 @@ echo "Installing tools"
 sudo pacman --noconfirm -S pass pwgen
 
 # General file editing
-sudo pacman --noconfirm -S neovim meld screen
+sudo pacman --noconfirm -S neovim screen tmux
  
 # Random Development Tools
 sudo pacman --noconfirm -S strace whois wireshark-qt wireshark-cli bind-tools \
-    httpie bat prettyping the_silver_searcher fd tldr github-cli
+    httpie bat prettyping the_silver_searcher fd tldr github-cli meld
 
 # AWS
 sudo pacman --noconfirm -S aws-cli
@@ -38,7 +38,7 @@ sudo systemctl start docker.service
 sudo gpasswd -a $USER docker
 
 # Install some basic programs available via yay
-yay --noconfirm -S google-chrome spotify
+yay --noconfirm -S google-chrome spotify joplin-desktop
 
 # IDE
 yay --noconfirm -S visual-studio-code-bin
@@ -49,6 +49,8 @@ code --install-extension Tanh.hjson-formatter
 code --install-extension laktak.hjson
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+code --install-extension GitHub.copilot
+code --install-extension GitHub.copilot-chat
 
 # Pulse Secure VPN
 sudo pacman --noconfirm -S gtkmm3 webkit2gtk
@@ -77,25 +79,12 @@ backup() {
     fi
 }
 
-# Removing this file fixes a vscode wayland issue
+# Removing code-flags.conf fixes a vscode wayland issue
 backup ~/.config/code-flags.conf
-#backup ~/.aliases
-backup ~/.gitconfig
-backup ~/.gitignore
+
+backup ~/.config/sway/config
 backup ~/.screenrc
-backup ~/.vimrc
 backup ~/.tmux.conf
-backup ~/.zshrc
-backup ~/.pam_environment
-backup ~/.ssh/config
-mkdir -p ~/.gnupg/
-backup ~/.gnupg/gpg-agent.conf
-mkdir -p ~/.local/bin # Xorg
-backup ~/.local/bin/fuzzy_lock.sh # Xorg
-mkdir -p ~/.config/i3status/ # Xorg
-backup ~/.config/i3status/config # Xorg
-mkdir -p ~/.config/systemd/user
-backup ~/.config/systemd/user/ssh-agent.service
 
 echo "Symlinking files:"
 link() {
@@ -106,29 +95,23 @@ link() {
     ln -s "$from" "$to"
 }
 
-link $PWD/sway/customconf.conf ~/.config/sway/config.d/customconf.conf
-link $PWD/sway/customdefs.conf ~/.config/sway/definitions.d/customdefs.conf
+link $PWD/sway/config ~/.config/sway/config
+link $PWD/sway/config.d/myconfig.conf ~/.config/sway/config.d/additional_config.conf
+link $PWD/sway/definitions.d/mydefs.conf ~/.config/sway/definitions.d/additional_defs.conf
+link $PWD/sway/modes ~/.config/sway/modes
 link $PWD/sway/waybar_config.jsonc ~/.config/waybar/config.jsonc
 link $PWD/aliases ~/.config/zsh/config.d/other_aliases
-link ~/dotfiles/gitconfig ~/.gitconfig
-link ~/dotfiles/gitignore ~/.gitignore
 link ~/dotfiles/screenrc ~/.screenrc
-link ~/dotfiles/vimrc ~/.vimrc
 link ~/dotfiles/tmux.conf ~/.tmux.conf
-link ~/dotfiles/zshrc ~/.zshrc
-link ~/dotfiles/pam_environment ~/.pam_environment
-link ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-link ~/dotfiles/ssh-agent.service ~/.config/systemd/user/ssh-agent.service
 
 mkdir -p ~/.ssh/
-if [ ! -f ~/.ssh/id_rsa.pub ]; then
-    mkdir ~/.ssh
-    ssh-keygen -b 4096 -o -a 100 -t rsa
-    #ssh-add # Not clear whether this is needed or not 6/1/2020
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+    mkdir -p ~/.ssh
+    ssh-keygen
 fi
-link ~/dotfiles/ssh_config ~/.ssh/config
 
-systemctl --user start ssh-agent.service
-systemctl --user enable ssh-agent.service
+git config user.name "Phelps Williams"
+git config user.email "phelps@netflix.com"
 
+echo "\nPlace background image at ~/Pictures/background.jpg\n"
 echo "All done."
