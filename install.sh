@@ -26,7 +26,7 @@ sudo pacman --noconfirm -S neovim screen tmux
  
 # Random Development Tools
 sudo pacman --noconfirm -S strace whois wireshark-qt wireshark-cli bind-tools \
-    httpie bat prettyping the_silver_searcher fd tldr github-cli meld
+    httpie bat prettyping the_silver_searcher fd tldr github-cli meld base-devel
 
 # AWS
 sudo pacman --noconfirm -S aws-cli
