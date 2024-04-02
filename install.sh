@@ -32,7 +32,7 @@ sudo pacman --noconfirm -S strace whois wireshark-qt wireshark-cli bind-tools \
 sudo pacman --noconfirm -S aws-cli
 
 # Docker
-sudo pacman --noconfirm -S docker
+sudo pacman --noconfirm -S docker docker-compose
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 sudo gpasswd -a $USER docker
